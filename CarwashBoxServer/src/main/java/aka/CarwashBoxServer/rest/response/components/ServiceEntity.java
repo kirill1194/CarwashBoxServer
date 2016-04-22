@@ -1,4 +1,4 @@
-package aka.CarwashBoxServer.rest.response.entity;
+package aka.CarwashBoxServer.rest.response.components;
 
 import javax.xml.bind.annotation.XmlRootElement;
 

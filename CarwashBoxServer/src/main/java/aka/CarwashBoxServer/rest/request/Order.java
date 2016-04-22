@@ -7,17 +7,23 @@ import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
+import aka.CarwashBoxServer.rest.validation.NotNullEmptyPar;
+import aka.CarwashBoxServer.rest.validation.NotNullPar;
+
 
 
 @XmlRootElement
 @XmlAccessorType(XmlAccessType.FIELD)
 public class Order
 {
+	@NotNullEmptyPar(label="ids")
 	private List<String> ids;
+	@NotNullPar(label="meet")
 	private Long meet;
 
-	protected String comment;
-	@XmlElement(nillable=false)
+	private String comment;
+
+	@NotNullEmptyPar(label="token")
 	private String token;
 
 

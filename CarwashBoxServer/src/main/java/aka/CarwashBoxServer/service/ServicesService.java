@@ -3,7 +3,7 @@ package aka.CarwashBoxServer.service;
 import java.util.LinkedList;
 import java.util.List;
 
-import aka.CarwashBoxServer.rest.response.entity.ServiceEntity;
+import aka.CarwashBoxServer.rest.response.components.ServiceEntity;
 
 public class ServicesService
 {

@@ -8,6 +8,7 @@ import javax.ws.rs.QueryParam;
 import org.springframework.stereotype.Component;
 
 import aka.CarwashBoxServer.rest.response.Token;
+import aka.CarwashBoxServer.rest.validation.NotNullEmptyPar;
 import aka.CarwashBoxServer.service.SigninService;
 
 @Component
@@ -17,13 +18,9 @@ public class SignIn extends BaseController
 	@GET
 	@Produces(MEDIA_TYPE_JSON)
 	public Token autorization(
-			@QueryParam("pass") String pass,
-			@QueryParam("phone") String phone
-			)
+			@NotNullEmptyPar(label = PASS) @QueryParam(PASS) String pass,
+			@NotNullEmptyPar(label = PHONE) @QueryParam(PHONE) String phone)
 	{
-
-		checkQueryParam(pass, "pass");
-		checkQueryParam(phone, "phone");
 		return (new SigninService()).signin(pass, phone);
 	}
 }

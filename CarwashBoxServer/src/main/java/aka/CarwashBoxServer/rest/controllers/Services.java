@@ -8,7 +8,7 @@ import javax.ws.rs.Produces;
 
 import org.springframework.stereotype.Component;
 
-import aka.CarwashBoxServer.rest.response.entity.ServiceEntity;
+import aka.CarwashBoxServer.rest.response.components.ServiceEntity;
 import aka.CarwashBoxServer.service.ServicesService;
 
 @Component

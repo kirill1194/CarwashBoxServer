@@ -8,7 +8,13 @@ import javax.ws.rs.core.Response;
 
 public abstract class BaseController
 {
+	public final static String PASS = "pass";
+	public final static String PHONE = "phone";
+	public final static String TOKEN = "token";
+
+
 	final public static  String MEDIA_TYPE_JSON = MediaType.APPLICATION_JSON + ";charset=utf-8";
+
 	public static void checkQueryParam(String queryParam, String name)
 	{
 		if (queryParam == null)

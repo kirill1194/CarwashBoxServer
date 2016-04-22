@@ -12,6 +12,19 @@
             </Policies>
             <DefaultRolloverStrategy max="2000"/>
         </RollingFile>
+        
+    <RollingFile name="RequestResponse" fileName="${request.response.log.file}"
+            filePattern="${request.response.log.file}-%d{MM-dd-yyyy}-%i.log">
+            <PatternLayout>
+                <Pattern>%d{DEFAULT} %m%n%n</Pattern>
+            </PatternLayout>
+            <Policies>
+                <TimeBasedTriggeringPolicy />
+                <SizeBasedTriggeringPolicy size="1 MB"/>
+            </Policies>
+            <DefaultRolloverStrategy max="2000"/>
+        </RollingFile>
+        
     <Console name="Console" target="SYSTEM_OUT">
       <PatternLayout pattern="%d{DEFAULT} %p %c(%L) %m%n%n"/>
     </Console>
@@ -20,10 +33,13 @@
   	<Logger name="EventLogger" level="debug" additivity="false">
       <AppenderRef ref="Console"/>
     </Logger>
+    <Logger name="aka.CarwashBoxServer.rest.filters" level="debug">
+    	<AppenderRef ref="RequestResponse"/>
+    </Logger>
  
     <Root level="debug">
-      <AppenderRef ref="RollingFile"/>
       <AppenderRef ref="Console"/>
+      <AppenderRef ref="RollingFile"/>
     </Root>
   </Loggers>
 </Configuration>
