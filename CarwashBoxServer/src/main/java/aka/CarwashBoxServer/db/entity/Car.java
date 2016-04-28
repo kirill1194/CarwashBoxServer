@@ -25,6 +25,7 @@ public class Car
 	@Column(name="number")
 	private String number;
 
+
 	@ManyToOne()
 	@JoinColumn(name="car_type_id")
 	private CarType carType;

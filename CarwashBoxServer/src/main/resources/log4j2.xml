@@ -36,6 +36,9 @@
     <Logger name="aka.CarwashBoxServer.rest.filters" level="debug">
     	<AppenderRef ref="RequestResponse"/>
     </Logger>
+    <Logger name="org.springframework.web.context.ContextLoader" level="debug">
+    	<AppenderRef ref="Console"/>	
+    </Logger>
  
     <Root level="debug">
       <AppenderRef ref="Console"/>

@@ -30,6 +30,7 @@ public class Registration extends BaseController
 	public IUserDao dao;
 
 	@Autowired
+	@Qualifier("registrationService")
 	public IRegistrationService registrationService;
 
 	@Produces(MEDIA_TYPE_JSON)

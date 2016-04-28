@@ -27,7 +27,7 @@ public class SigninService
 			throw new ClientErrorException("Неверный пароль", Status.FORBIDDEN);
 		String newAccessToken = PasswordSecurity.buildAccessToken(phone, pass);
 		user.setAccessToken(newAccessToken);
-		userDao.update(user);
+		userDao.remove(user);
 		return new Token(newAccessToken);
 	}
 }

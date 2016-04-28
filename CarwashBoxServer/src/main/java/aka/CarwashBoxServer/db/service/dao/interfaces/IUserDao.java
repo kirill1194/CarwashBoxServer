@@ -1,10 +1,9 @@
 package aka.CarwashBoxServer.db.service.dao.interfaces;
 
-import aka.CarwashBoxServer.db.entity.User;
-import aka.CarwashBoxServer.db.service.dao.IGenericDao;
+import com.googlecode.genericdao.dao.hibernate.GenericDAO;
 
-public interface IUserDao extends IGenericDao<User, Integer>
-{
+import aka.CarwashBoxServer.db.entity.User;
+
+public interface IUserDao extends GenericDAO<User, Integer> {
 	public User findByPhone(String phone);
-	public User findByAccessToken(String accessToken);
 }

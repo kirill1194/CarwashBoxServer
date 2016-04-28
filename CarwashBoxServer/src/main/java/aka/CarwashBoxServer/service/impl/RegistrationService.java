@@ -1,9 +1,7 @@
 package aka.CarwashBoxServer.service.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
-import org.springframework.transaction.annotation.Transactional;
 
 import aka.CarwashBoxServer.db.entity.User;
 import aka.CarwashBoxServer.db.service.dao.interfaces.IUserDao;
@@ -16,10 +14,9 @@ import aka.CarwashBoxServer.service.interfaces.IRegistrationService;
 public class RegistrationService implements IRegistrationService
 {
 	@Autowired
-	@Qualifier(value = "UserDao")
 	public IUserDao userDao;
 
-	@Transactional
+	//	@Transactional
 	@Override
 	public Token registrate(String phone, String pass) throws RegistrationException
 	{
