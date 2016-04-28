@@ -1,13 +1,81 @@
 <beans xmlns="http://www.springframework.org/schema/beans"
-       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-       xmlns:context="http://www.springframework.org/schema/context"
-       xsi:schemaLocation="http://www.springframework.org/schema/beans
-  http://www.springframework.org/schema/beans/spring-beans.xsd
-  http://www.springframework.org/schema/context
-  http://www.springframework.org/schema/context/spring-context.xsd"
-        >
- 
-	<!-- <context:component-scan base-package="aka.CarwashBoxServer.rest" /> -->
- 
- 	
+	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+  http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
+  http://www.springframework.org/schema/aop 
+  http://www.springframework.org/schema/aop/spring-aop-2.5.xsd
+  http://www.springframework.org/schema/context 
+  http://www.springframework.org/schema/context/spring-context-2.5.xsd
+  http://www.springframework.org/schema/tx 
+  http://www.springframework.org/schema/tx/spring-tx-2.5.xsd"
+	xmlns:tx="http://www.springframework.org/schema/tx" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context">
+
+	<context:component-scan base-package="aka.CarwashBoxServer" />
+
+	<bean id="dataSource" class="org.apache.commons.dbcp2.BasicDataSource"
+		destroy-method="close">
+		<property name="driverClassName" value="com.mysql.jdbc.Driver" />
+		<property name="url"
+			value="jdbc:mysql://212.119.243.243:3306/CarWash?useUnicode=true&amp;characterEncoding=UTF-8" />
+		<property name="username" value="root" />
+		<property name="password" value="milan2587871" />
+	</bean>
+
+	<bean id="sessionFactory"
+		class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">
+		<property name="dataSource" ref="dataSource" />
+		<property name="configLocation" value="classpath:hibernate.cfg.xml" />
+		<property name="packagesToScan" value="aka.CarwashBoxServer.db.entity" />
+	</bean>
+
+	<tx:annotation-driven />
+	<bean id="transactionManager"
+		class="org.springframework.orm.hibernate4.HibernateTransactionManager">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+
+	<bean id="UserDao" class="aka.CarwashBoxServer.db.service.dao.impl.UserDao">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+
+	<bean id="ServiceDao" class="aka.CarwashBoxServer.db.service.dao.GenericDao">
+		<constructor-arg>
+			<value>aka.CarwashBoxServer.db.entity.Service</value>
+		</constructor-arg>
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+
+	<bean id="CarTypeDao" class="aka.CarwashBoxServer.db.service.dao.GenericDao">
+		<constructor-arg>
+			<value>aka.CarwashBoxServer.db.entity.CarType</value>
+		</constructor-arg>
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+
+	<bean id="CarDao" class="aka.CarwashBoxServer.db.service.dao.GenericDao">
+		<constructor-arg>
+			<value>aka.CarwashBoxServer.db.entity.Car</value>
+		</constructor-arg>
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+
+	<bean id="OrderDao" class="aka.CarwashBoxServer.db.service.dao.GenericDao">
+		<constructor-arg>
+			<value>aka.CarwashBoxServer.db.entity.Order</value>
+		</constructor-arg>
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+
+	<bean id="registrationService" class="aka.CarwashBoxServer.service.impl.RegistrationService" />
+
 </beans>

@@ -1,5 +1,6 @@
 package aka.CarwashBoxServer.rest.response.components;
 
+import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlRootElement;
 
 @XmlRootElement
@@ -9,6 +10,7 @@ public class CarGet
 	private String name;
 	private Integer id;
 	private Integer type;
+	@XmlAttribute(name="type_name")
 	private String typeName;
 	private String number;
 

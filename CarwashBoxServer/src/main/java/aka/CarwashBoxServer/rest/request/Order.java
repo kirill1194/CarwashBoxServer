@@ -23,9 +23,8 @@ public class Order
 
 	private String comment;
 
-	@NotNullEmptyPar(label="token")
-	private String token;
-
+	@XmlElement(name="car_id")
+	private Integer carId;
 
 	//@formatter:off
 	public Order() {}
@@ -35,9 +34,7 @@ public class Order
 	public void setMeet(Long meet) { this.meet = meet; }
 	public String getComment() { return comment; }
 	public void setComment(String comment) { this.comment = comment; }
-	@XmlElement(required=true)
-	public String getToken() { return token; }
-	@XmlElement(required=true)
-	public void setToken(String token) { this.token = token; }
+	public Integer getCarId() { return this.carId; }
+	public void setCarId(Integer carId) { this.carId = carId; }
 	//@formatter:on
 }

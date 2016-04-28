@@ -3,6 +3,7 @@ package aka.CarwashBoxServer.rest.response;
 import java.util.LinkedList;
 import java.util.List;
 
+import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlRootElement;
 
 import aka.CarwashBoxServer.rest.response.components.CarGet;
@@ -11,6 +12,7 @@ import aka.CarwashBoxServer.rest.response.components.CarGet;
 public class PrivateOfficeGet
 {
 	private String name;
+	@XmlAttribute(name="second_name")
 	private String secondName;
 	private String phone;
 	private List<CarGet> cars;

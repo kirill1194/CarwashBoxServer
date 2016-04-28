@@ -1,6 +1,7 @@
 package aka.CarwashBoxServer.rest.request;
 
 import javax.validation.constraints.Pattern;
+import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlRootElement;
 
 import aka.CarwashBoxServer.rest.validation.NotNullEmptyPar;
@@ -11,6 +12,7 @@ public class PrivateOfficeSet
 
 	@NotNullEmptyPar(label = "name")
 	private String name;
+	@XmlAttribute(name="second_name")
 	private String secondName;
 	@NotNullEmptyPar(label = "phone")
 	@Pattern(regexp = "^\\+[0-9]{11}$", message = "{phone.valid}")

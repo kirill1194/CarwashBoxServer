@@ -30,16 +30,18 @@ public class CarTypes
 
 		type = new CarType();
 		type.setId(2);
-		type.setType("Седан");
+		type.setType("Лада СЕДААААААН!");
 		list.add(type);
 
 		return list;
 	}
 
+
 	@GET
 	@Path("{carType}")
 	public CarType getCarTypeById(@PathParam("carType") Integer carTypeId)
 	{
+
 		CarType carType = new CarType();
 		carType.setId(carTypeId);
 		if (carTypeId == 1)

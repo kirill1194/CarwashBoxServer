@@ -19,15 +19,84 @@
 
 
 	<properties>
-		<spring3.version>3.2.9.RELEASE</spring3.version>
+		<!-- <spring.version>3.2.9.RELEASE</spring.version> -->
+		<spring.version>4.0.3.RELEASE</spring.version>
+
 		<jersey.version>2.22.2</jersey.version>
+		<hibernate.version>4.3.5.Final</hibernate.version>
 	</properties>
 	<dependencies>
+
+		<!-- Spring 4 dependencies -->
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-core</artifactId>
+			<version>${spring.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-context</artifactId>
+			<version>${spring.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-web</artifactId>
+			<version>${spring.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework.security</groupId>
+			<artifactId>spring-security-core</artifactId>
+			<version>${spring.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-orm</artifactId>
+			<version>${spring.version}</version>
+			<type>jar</type>
+			<scope>compile</scope>
+		</dependency>
 
 		<dependency>
 			<groupId>com.google.code.gson</groupId>
 			<artifactId>gson</artifactId>
 			<version>2.6.2</version>
+		</dependency>
+
+
+		<!-- Hibernate -->
+
+		<dependency>
+			<groupId>org.hibernate</groupId>
+			<artifactId>hibernate-core</artifactId>
+			<version>${hibernate.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.hibernate</groupId>
+			<artifactId>hibernate-entitymanager</artifactId>
+			<version>${hibernate.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>jstl</groupId>
+			<artifactId>jstl</artifactId>
+			<version>1.2</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.apache.commons</groupId>
+			<artifactId>commons-dbcp2</artifactId>
+			<version>2.0</version>
+		</dependency>
+
+		<dependency>
+			<groupId>mysql</groupId>
+			<artifactId>mysql-connector-java</artifactId>
+			<version>5.1.38</version>
 		</dependency>
 
 
@@ -85,30 +154,8 @@
 			<!-- <scope>runtime</scope> -->
 		</dependency>
 
-		<!-- Spring 3 dependencies -->
-		<dependency>
-			<groupId>org.springframework</groupId>
-			<artifactId>spring-core</artifactId>
-			<version>${spring3.version}</version>
-		</dependency>
 
-		<dependency>
-			<groupId>org.springframework</groupId>
-			<artifactId>spring-context</artifactId>
-			<version>${spring3.version}</version>
-		</dependency>
 
-		<dependency>
-			<groupId>org.springframework</groupId>
-			<artifactId>spring-web</artifactId>
-			<version>${spring3.version}</version>
-		</dependency>
-
-		<dependency>
-			<groupId>org.springframework.security</groupId>
-			<artifactId>spring-security-core</artifactId>
-			<version>${spring3.version}</version>
-		</dependency>
 	</dependencies>
 
 	<build>
@@ -139,17 +186,17 @@
 			<id>macBook</id>
 			<properties>
 				<log.dir>/Users/Kirill/logs/CarwashBoxServerLog</log.dir>
-				<request.response.log.file>/Users/Kirill/logs/CarwashBoxServerLog/request-response_log</request.response.log.file>
-				<log.file>/Users/Kirill/logs/CarwashBoxServerLog/service/log</log.file>
+				<request.response.log.file>/Users/Kirill/logs/CarwashBoxServerLog/log</request.response.log.file>
+				<log.file>/Users/Kirill/logs/CarwashBoxServerLog/service/service_log</log.file>
 			</properties>
 		</profile>
 
 		<profile>
 			<id>productions</id>
 			<properties>
-				<log.file>/home/kirill/logs/carwash_logs/service/log</log.file>
-				<request.response.log.file>/home/kirill/logs/carwash_logs/request-response_log</request.response.log.file>
 				<log.dir>/home/kirill/logs/carwash_logs</log.dir>
+				<request.response.log.file>/home/kirill/logs/carwash_logs/log</request.response.log.file>
+				<log.file>/home/kirill/logs/carwash_logs/service/service_log</log.file>
 			</properties>
 		</profile>
 

@@ -27,12 +27,12 @@ public class SecurityFilter implements ContainerRequestFilter
 				requestContext.getHeaderString(HttpHeaders.AUTHORIZATION);
 
 		// Check if the HTTP Authorization header is present and formatted correctly
-		if (authorizationHeader == null || !authorizationHeader.startsWith("Bearer ")) {
-			throw new AutorizationHeaderNotExistException("Request must have authorization header: \"Authorization: Bearer you_token\"");
+		if (authorizationHeader == null) {
+			throw new AutorizationHeaderNotExistException("Request must have authorization header: \"Authorization: you_token\"");
 		}
 
 		// Extract the token from the HTTP Authorization header
-		String token = authorizationHeader.substring("Bearer".length()).trim();
+		String token = authorizationHeader;
 		TokenValidator validator = new TokenValidator();
 		final User user;
 		try {

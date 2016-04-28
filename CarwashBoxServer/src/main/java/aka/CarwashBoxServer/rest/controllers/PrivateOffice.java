@@ -6,6 +6,7 @@ import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
+import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
@@ -19,6 +20,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 
 import aka.CarwashBoxServer.rest.request.CarAdd;
 import aka.CarwashBoxServer.rest.request.PrivateOfficeSet;
+import aka.CarwashBoxServer.rest.response.Id;
 import aka.CarwashBoxServer.rest.response.PrivateOfficeGet;
 import aka.CarwashBoxServer.rest.response.components.CarGet;
 import aka.CarwashBoxServer.rest.security.Secured;
@@ -72,11 +74,13 @@ public class PrivateOffice extends BaseController
 	@Secured
 	@Path("car")
 	@POST
-	public Response addCar(
+	public Id addCar(
 			@Valid @NotNull(message = "{request.empty}") @RequestBody CarAdd car
 			)
 	{
-		return Response.status(200).build();
+		Id id = new Id();
+		id.setId(1);
+		return id;
 	}
 
 	@Secured
@@ -84,6 +88,17 @@ public class PrivateOffice extends BaseController
 	@DELETE
 	public Response deleteCar(
 			@PathParam("carId") Integer carId
+			)
+	{
+		return Response.ok().build();
+	}
+
+	@Secured
+	@Path("car/{carId}")
+	@PUT
+	public Response editCar(
+			@PathParam("carId") String carId,
+			@RequestBody CarAdd car
 			)
 	{
 		return Response.ok().build();

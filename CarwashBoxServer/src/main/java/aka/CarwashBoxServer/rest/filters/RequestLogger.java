@@ -8,6 +8,7 @@ import java.io.InputStream;
 import javax.ws.rs.container.ContainerRequestContext;
 import javax.ws.rs.container.ContainerRequestFilter;
 import javax.ws.rs.container.PreMatching;
+import javax.ws.rs.core.HttpHeaders;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.MultivaluedMap;
 import javax.ws.rs.ext.Provider;
@@ -45,6 +46,11 @@ public class RequestLogger implements ContainerRequestFilter
 			{
 				builder.append('\t' + PREFIX + key + " = " + queryPar.get(key) + '\n');
 			}
+
+			String authorizationHeader =
+					arg.getHeaderString(HttpHeaders.AUTHORIZATION);
+			if (authorizationHeader != null)
+				builder.append(PREFIX + HttpHeaders.AUTHORIZATION + ": " + authorizationHeader);
 
 			// entity JSON
 			if (arg.getMediaType() != null && arg.getMediaType().toString().startsWith((MediaType.APPLICATION_JSON)))
