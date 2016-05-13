@@ -3,7 +3,7 @@ package aka.CarwashBoxServer.rest.response.components;
 import javax.xml.bind.annotation.XmlRootElement;
 
 @XmlRootElement
-public class CarType
+public class CarTypesComponentResponse
 {
 	private String type;
 	private Integer id;

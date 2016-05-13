@@ -3,6 +3,7 @@ package aka.CarwashBoxServer.db.entity;
 import java.util.LinkedList;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -39,14 +40,13 @@ public class User
 	private String pass;
 
 
-	@OneToMany(fetch=FetchType.LAZY)
+	@OneToMany(fetch=FetchType.LAZY, cascade={CascadeType.ALL})
 	@JoinColumn(name="user_id")
 	private List<Car> cars;
 
 	@OneToMany(fetch=FetchType.LAZY)
 	@JoinColumn(name="user_id")
 	private List<Order> orders;
-
 
 
 	//@formatter:off

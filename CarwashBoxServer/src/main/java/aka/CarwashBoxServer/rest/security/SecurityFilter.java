@@ -12,6 +12,10 @@ import javax.ws.rs.core.Response;
 import javax.ws.rs.core.SecurityContext;
 import javax.ws.rs.ext.Provider;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
+
 import aka.CarwashBoxServer.rest.exceptions.AutorizationHeaderNotExistException;
 
 @Secured
@@ -19,6 +23,10 @@ import aka.CarwashBoxServer.rest.exceptions.AutorizationHeaderNotExistException;
 @Priority(Priorities.AUTHENTICATION)
 public class SecurityFilter implements ContainerRequestFilter
 {
+	@Autowired
+	private TokenValidator validator;
+
+	private static final Logger log = LogManager.getLogger(SecurityFilter.class);
 
 	@Override
 	public void filter(ContainerRequestContext requestContext) throws IOException
@@ -33,7 +41,6 @@ public class SecurityFilter implements ContainerRequestFilter
 
 		// Extract the token from the HTTP Authorization header
 		String token = authorizationHeader;
-		TokenValidator validator = new TokenValidator();
 		final User user;
 		try {
 
@@ -79,6 +86,7 @@ public class SecurityFilter implements ContainerRequestFilter
 			});
 
 		} catch (Exception e) {
+			log.info(e);
 			requestContext.abortWith(
 					Response.status(Response.Status.UNAUTHORIZED).build());
 		}

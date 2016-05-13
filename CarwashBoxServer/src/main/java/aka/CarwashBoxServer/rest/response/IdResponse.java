@@ -3,7 +3,7 @@ package aka.CarwashBoxServer.rest.response;
 import javax.xml.bind.annotation.XmlRootElement;
 
 @XmlRootElement
-public class Id
+public class IdResponse extends BaseResponse
 {
 	private Integer id;
 

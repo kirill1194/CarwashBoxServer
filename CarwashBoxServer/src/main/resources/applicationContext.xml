@@ -12,31 +12,53 @@
 
 	<context:component-scan base-package="aka.CarwashBoxServer" />
 
-	<bean id="dataSource" class="org.apache.commons.dbcp2.BasicDataSource">
+	<bean id="dataSource" class="org.apache.commons.dbcp2.BasicDataSource"
+		destroy-method="close">
 		<property name="driverClassName" value="com.mysql.jdbc.Driver" />
 		<property name="url"
-			value="jdbc:mysql://212.119.243.243:3306/CarWash?useUnicode=true&amp;characterEncoding=UTF-8" />
+			value="jdbc:mysql://${db.ip}/CarWash?useUnicode=true&amp;characterEncoding=UTF-8" />
 		<property name="username" value="root" />
 		<property name="password" value="milan2587871" />
 	</bean>
+
 	<bean id="sessionFactory"
-		class="org.springframework.orm.hibernate3.LocalSessionFactoryBean">
+		class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">
 		<property name="dataSource" ref="dataSource" />
 		<property name="configLocation" value="classpath:hibernate.cfg.xml" />
+		<property name="packagesToScan" value="aka.CarwashBoxServer.db.entity" />
 	</bean>
 
-	<bean id="userDao" class="aka.CarwashBoxServer.db.service.dao.impl.UserDao">
-		<property name="sessionFactory" ref="sessionFactory"/>
-	</bean>
-	
-	<bean id="registration" class="aka.CarwashBoxServer.service.impl.RegistrationService"/>
 
+	<bean id="transactionManager"
+		class="org.springframework.orm.hibernate4.HibernateTransactionManager">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
 	<tx:annotation-driven transaction-manager="transactionManager" />
 
-	<bean id="hibernateTransactionManager"
-        class="org.springframework.orm.hibernate3.HibernateTransactionManager">
-    <property name="sessionFactory" ref="sessionFactory" />
-</bean>
-
+	<bean id="userDao" class="aka.CarwashBoxServer.db.service.dao.impl.UserDao">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="carDao" class="aka.CarwashBoxServer.db.service.dao.impl.CarDao">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="carTypeDao" class="aka.CarwashBoxServer.db.service.dao.impl.CarTypeDao">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="orderDao" class="aka.CarwashBoxServer.db.service.dao.impl.OrderDao">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="serviceDao" class="aka.CarwashBoxServer.db.service.dao.impl.ServiceDao">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
 
 </beans>

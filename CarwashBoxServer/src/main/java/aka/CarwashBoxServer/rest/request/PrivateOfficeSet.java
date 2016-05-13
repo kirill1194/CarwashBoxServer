@@ -15,7 +15,7 @@ public class PrivateOfficeSet
 	@XmlAttribute(name="second_name")
 	private String secondName;
 	@NotNullEmptyPar(label = "phone")
-	@Pattern(regexp = "^\\+[0-9]{11}$", message = "{phone.valid}")
+	@Pattern(regexp = "^[0-9]{11}$", message = "{phone.valid}")
 	private String phone;
 
 	//@formatter:off

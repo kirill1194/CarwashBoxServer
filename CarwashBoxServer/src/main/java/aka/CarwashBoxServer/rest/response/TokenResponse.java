@@ -3,7 +3,7 @@ package aka.CarwashBoxServer.rest.response;
 import javax.xml.bind.annotation.XmlRootElement;
 
 @XmlRootElement
-public class Token
+public class TokenResponse extends BaseResponse
 {
 	private String token;
 
@@ -17,7 +17,7 @@ public class Token
 		this.token = token;
 	}
 
-	public Token( String token )
+	public TokenResponse( String token )
 	{
 		this.token = token;
 	}

@@ -68,8 +68,16 @@ public class RequestLogger implements ContainerRequestFilter
 
 						byte[] requestEntity = out.toByteArray();
 						if (requestEntity.length != 0)
-							b.append(new String(requestEntity));
-
+						{
+							String entity = new String(requestEntity);
+							if (entity != null)
+							{
+								builder.append(PREFIX + "entity: \n");
+								String[] entityLines = entity.split("\n");
+								for (String entityLine : entityLines)
+									builder.append("\t" + entityLine + '\n');
+							}
+						}
 						arg.setEntityStream(new ByteArrayInputStream(requestEntity));
 					}
 				} catch (IOException e)

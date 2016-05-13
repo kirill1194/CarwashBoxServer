@@ -2,6 +2,7 @@ package aka.CarwashBoxServer.db.entity;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
@@ -25,10 +26,14 @@ public class Car
 	@Column(name="number")
 	private String number;
 
-
 	@ManyToOne()
 	@JoinColumn(name="car_type_id")
 	private CarType carType;
+
+	@ManyToOne(fetch=FetchType.LAZY)
+	@JoinColumn(name="user_id")
+	private User user;
+
 
 	//@formatter:off
 	public Car(){ }
@@ -41,6 +46,8 @@ public class Car
 	public void setNumber(String number) { this.number = number; }
 	public CarType getCarType() { return carType; }
 	public void setCarType(CarType carType) { this.carType = carType; }
+	public User getUser() { return this.user; }
+	public void setUser(User user) { this.user = user; }
 	//@formatter:on
 
 

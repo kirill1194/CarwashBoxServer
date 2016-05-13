@@ -3,6 +3,7 @@ package aka.CarwashBoxServer.rest.controllers;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
+import javax.ws.rs.Produces;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
@@ -25,6 +26,7 @@ public class MakeOrder extends BaseController
 	@Secured
 	@POST
 	@Consumes(MediaType.APPLICATION_JSON)
+	@Produces(MEDIA_TYPE_JSON)
 	public Response makeOrder(
 			@Validated @RequestBody Order order)
 	{

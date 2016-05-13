@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.Collection;
 import java.util.List;
 
+import javax.annotation.Priority;
 import javax.ws.rs.container.ContainerRequestContext;
 import javax.ws.rs.container.ContainerResponseContext;
 import javax.ws.rs.container.ContainerResponseFilter;
@@ -17,6 +18,7 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
 @Provider
+@Priority(0)
 public class ResponseLogger implements ContainerResponseFilter
 {
 
@@ -77,20 +79,20 @@ public class ResponseLogger implements ContainerResponseFilter
 				{
 					List<?> list = (List<?>) objEntity;
 					StringBuilder validErrors = new StringBuilder();
-					int i=0;
+					int i = 0;
 					for (Object o : list)
 					{
 						if (o instanceof ValidationError)
 						{
 							ValidationError validError = (ValidationError) o;
-							validErrors.append("\t\t" + (i+1) + ") " + validError.getMessage() + '\n');
+							validErrors.append("\t\t" + (i + 1) + ") " + validError.getMessage() + '\n');
 							i++;
 						} else
 						{
 							break;
 						}
 						if (i == 5)
-							validErrors.append("\t\t" + "and more " + (list.size()-i) +"...\n");
+							validErrors.append("\t\t" + "and more " + (list.size() - i) + "...\n");
 
 					}
 					if (validErrors.length() != 0)
@@ -111,7 +113,13 @@ public class ResponseLogger implements ContainerResponseFilter
 			} else
 			{
 				String entity = gson.toJson(response.getEntity());
-				builder.append(PREFIX + "entity: " + entity);
+				if (entity != null)
+				{
+					builder.append(PREFIX + "entity: \n");
+					String[] entityLines = entity.split("\n");
+					for (String entityLine : entityLines)
+						builder.append("\t" + entityLine + '\n');
+				}
 			}
 
 			if (builder.charAt(builder.length() - 1) == '\n')

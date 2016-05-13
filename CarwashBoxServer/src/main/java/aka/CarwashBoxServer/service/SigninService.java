@@ -8,7 +8,7 @@ import org.springframework.beans.factory.annotation.Qualifier;
 
 import aka.CarwashBoxServer.db.entity.User;
 import aka.CarwashBoxServer.db.service.dao.interfaces.IUserDao;
-import aka.CarwashBoxServer.rest.response.Token;
+import aka.CarwashBoxServer.rest.response.TokenResponse;
 import aka.CarwashBoxServer.service.Utile.PasswordSecurity;
 
 public class SigninService
@@ -17,7 +17,7 @@ public class SigninService
 	@Autowired
 	@Qualifier("userDao")
 	public IUserDao userDao;
-	public Token signin(String pass, String phone)
+	public TokenResponse signin(String pass, String phone)
 	{
 		User user = userDao.findByPhone(phone);
 		if (user == null)
@@ -27,7 +27,7 @@ public class SigninService
 			throw new ClientErrorException("Неверный пароль", Status.FORBIDDEN);
 		String newAccessToken = PasswordSecurity.buildAccessToken(phone, pass);
 		user.setAccessToken(newAccessToken);
-		userDao.remove(user);
-		return new Token(newAccessToken);
+		userDao.update(user);
+		return new TokenResponse(newAccessToken);
 	}
 }
